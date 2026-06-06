@@ -1,0 +1,11 @@
+﻿__pycache__
+.vscode
+blog\__pycache__
+blog\routers\__pycache__
+blog\repository\__pycache__
+.env
+*.db
+*.sqlite
+*.sqlite3
+__pycache__/
+*.py[cod]

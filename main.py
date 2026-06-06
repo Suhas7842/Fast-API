@@ -1,0 +1,34 @@
+from fastapi import FastAPI
+from typing import Optional
+from pydantic import BaseModel
+
+app = FastAPI()
+
+@app.get("/blog")
+def index(limit: int = 10, published: bool = True, sort: Optional[str] = None):
+    if published:
+        return {"data": f'blog list with limit={limit} and published={published}'}
+    else:
+        return {"data": f'blog list with limit={limit}'}
+
+@app.get("/blog/unpublished")
+def unpublished():
+    return {"data": 'unpublished blogs'}
+
+@app.get("/blog/{id}")
+def show(id: str):
+    return {"data": id}
+
+@app.get("/blog/{id}/comments")
+def comments(id: str, limit: int = 10):
+    return {"data": {"comments": ['comment 1', 'comment 2', 'comment 3']}}
+
+class Blog(BaseModel):
+    title: str
+    body: str
+    published: Optional[bool]
+
+@app.post("/blog")
+def create(blog: Blog):
+    breakpoint()
+    return {"data": f'blog is created with title: {blog.title}'}
