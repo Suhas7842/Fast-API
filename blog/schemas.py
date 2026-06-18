@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Optional
 
 class BlogBase(BaseModel):
@@ -19,7 +19,7 @@ class User(BaseModel):
 class ShowUser(BaseModel):
     name: str
     email: str
-    blogs: List[Blog] = []
+    blogs: List[Blog] = Field(default_factory=list)
     class Config:
         from_attributes = True
 

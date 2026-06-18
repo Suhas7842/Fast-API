@@ -4,6 +4,10 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {"message": "Hello World"}
+
 @app.get("/blog")
 def index(limit: int = 10, published: bool = True, sort: Optional[str] = None):
     if published:
@@ -30,5 +34,4 @@ class Blog(BaseModel):
 
 @app.post("/blog")
 def create(blog: Blog):
-    breakpoint()
     return {"data": f'blog is created with title: {blog.title}'}
